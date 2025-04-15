@@ -63,11 +63,13 @@ Welcome, agent. You have successfully accessed the covert intelligence briefing 
 For immediate access to case files, input your agent ID and clearance code via the secure login portal. Unauthorized attempts will be logged.
 ```
 
+Alternatively, remove `style="display:none"` to display the button.
+
 ---
 
 ## 4. Directory Enumeration
 
-There seems to be a login portal, let’s see if we can find it by enumerating the hidden directories:
+The message indicates there is a login portal, let’s see if we can discover it by enumerating the hidden directories:
 
 ```bash
 gobuster dir -u http://192.168.1.111:8080 -w /usr/share/wordlists/dirb/big.txt
@@ -254,5 +256,21 @@ cat .flag | grep FLAG
 ### Congratulations.
 
 You’ve successfully uncovered the flag. Mission accomplished.
+
+---
+
+## Bonus
+
+Visit the homepage and you are greeted with a alternative image then before, download the image and save to your **attacker machine (Kali)**. The image is hiding a secret document using steganography. Let's extract the document using **steghide** without a passphrase.
+
+```bash
+steghide extract -sf fbi.jpeg
+```
+
+An embedded file called `OPERATION EVERBLOOM.txt".` is extracted. Let's check it out!
+
+```bash
+less 'OPERATION EVERBLOOM.txt'
+```
 
 ---
